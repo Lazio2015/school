@@ -2,7 +2,7 @@
  * @param {Array} data – массив CSS классов
  */
 function obfuscator(array_elements) {
-
+/*
     function countRepeatItems(arr) {
         var result = [];
         var current;
@@ -34,29 +34,73 @@ function obfuscator(array_elements) {
 
         return result;
     }
-
-    var lowerCharacters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-    var upperCharacters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-    var numbers = ['0','1','2','3','4','5','6','7','8','9'];
-    var symbols = ['!', '"', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~'];
-
-    function generate(elem, obj, index) {
-
-        //obj[elem] = elem + lowerCharacters[index];
-        //
-        //return obj;
-    }
-
-    var sortArr = countRepeatItems(array_elements).sort(function(a,b){
-        return b.count - a.count;
+	
+	var sortArr = countRepeatItems(array_elements).sort(function(a,b){
+		return b.count - a.count;
     });
+	*/
+	
+	function countRepeatItems(arr) {		
+		var data = {};
+		var prop;
 
-    var objObfuscator = {};
-    var name;
-    for (var i=0; i < sortArr.length; i++) {
-        name = sortArr[i].name;
-        generate(name, objObfuscator, i);
+        for (var i=0; i < arr.length; i++) {
+			prop = arr[i];
+			if (prop in data) {
+				data[prop]++;
+			} else {
+				data[prop] = 1;
+			}
+		}
+		
+        return data;
     }
+	
+	function sortObject(obj) {
+		var arr = [];
+		var prop;
+		for (prop in obj) {
+			if (obj.hasOwnProperty(prop)) {
+				arr.push({
+					'name': prop,
+					'count': obj[prop]
+				});
+			}
+		}
+		arr.sort(function(a, b) {
+			return b.value - a.value;
+		});
+		
+		return arr;
+	}
+
+	var objItems = countRepeatItems(array_elements);
+	var sortArr  = sortObject(objItems);
+	console.log('S', sortArr);
+	
+	var objObfuscator = {};
+    var name;
+	for (var i=0; i < sortArr.length; i++) {
+        name = sortArr[i].name;
+        generate(name, objObfuscator);
+    }
+
+    function generate(elem, obj) {
+		var arr = []; 
+		for (var i=0; i < elem.length; i++) {
+			arr.push(elem[i].charCodeAt());
+		}
+		
+		var num = parseInt(arr.join(''));
+		obj[elem] = num.toString(30);
+			
+		return obj;
+    }
+
+	
+	
+    var lowerCharactersArr = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+    var lowerCharactersStr = 'abcdefghijklmnopqrstuvwxyz';
+
     console.log('objObfuscator', objObfuscator);
-    //console.log(sortArr);
 };
