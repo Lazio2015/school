@@ -1,9 +1,31 @@
+<style>
+    .content {
+        width: 100px;
+        height:100px;
+        background-color: bisque;
+    }
+    .circle {
+        border-radius:50%;
+        border: red 3px solid;
+        width:inherit;
+        height:inherit;
+        padding:-3px;
+    }
+</style>
+
 <body>
     Test
+
+    <div class="content">
+        <div class="circle">
+
+        </div>
+
+    </div>
 </body>
 
 <script src="obfuscator.js"></script>
 <script>
-    array_elements = ["adgfdgd", "b", "c", "d", "e", "a", "b", "c", "f", "g", "h", "h", "h", "e", "a"];
+    array_elements = ["adf", "b", "c", "d", "e", "a", "b", "c", "f", "g", "h", "h", "h", "e", "a"];
     obfuscator(array_elements);
 </script>

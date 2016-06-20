@@ -39,7 +39,8 @@ function obfuscator(array_elements) {
 		return b.count - a.count;
     });
 	*/
-	
+	var alphabet = 'abcdefghijklmnopqrstuvwxyz';
+
 	function countRepeatItems(arr) {		
 		var data = {};
 		var prop;
@@ -68,7 +69,7 @@ function obfuscator(array_elements) {
 			}
 		}
 		arr.sort(function(a, b) {
-			return b.value - a.value;
+			return b.count - a.count;
 		});
 		
 		return arr;
@@ -79,28 +80,39 @@ function obfuscator(array_elements) {
 	console.log('S', sortArr);
 	
 	var objObfuscator = {};
-    var name;
+    var result =[];
+	var str = '';
 	for (var i=0; i < sortArr.length; i++) {
-        name = sortArr[i].name;
-        generate(name, objObfuscator);
-    }
-
-    function generate(elem, obj) {
-		var arr = []; 
-		for (var i=0; i < elem.length; i++) {
-			arr.push(elem[i].charCodeAt());
+		var name = sortArr[i].name;
+		result = generate(i, 4);
+		console.log('result', result.join(''));
+		for(var j=0; j< result.length; j++) {
+			var index = result[j];
+			str = str + alphabet[index];
 		}
-		
-		var num = parseInt(arr.join(''));
-		obj[elem] = num.toString(30);
-			
-		return obj;
+
+		objObfuscator[name] = str;
+		result = [];
+		str = '';
     }
 
-	
-	
-    var lowerCharactersArr = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-    var lowerCharactersStr = 'abcdefghijklmnopqrstuvwxyz';
+	console.log('objObfuscator', objObfuscator);
 
-    console.log('objObfuscator', objObfuscator);
+	function generate(i, limit) {
+		//if (i == 0) {
+		//	return;
+		//}
+
+		var div = Math.floor(i/limit);
+		var mod = i % limit;
+
+		return (div>0 ? generate(div - 1, limit) : []).concat(mod);
+		/*
+		var d = Math.floor(num / lim);
+		var m = num % lim;
+
+		return (d > 0 ? generate(d - 1, lim) : []).concat([m]);
+		*/
+
+	}
 };
