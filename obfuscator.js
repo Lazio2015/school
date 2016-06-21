@@ -10,7 +10,7 @@ function obfuscator(array_elements) {
 		var data = {};
 		var prop;
 
-        for (var i=0; i < arr.length; i++) {
+		for (var i=0; i < arr.length; i++) {
 			prop = arr[i];
 			if (prop in data) {
 				data[prop]++;
@@ -18,8 +18,8 @@ function obfuscator(array_elements) {
 				data[prop] = 1;
 			}
 		}
-		
-        return data;
+
+		return data;
 	};
 
 	function sort(obj) {
@@ -44,14 +44,14 @@ function obfuscator(array_elements) {
 		var name = sortArr[i];
 		var result = generate(i, 26);
 		var str = '';
-
+	
 		for(var j=0; j < result.length; j++) {
 			var index = result[j];
 			str = str + alphabet[index];
 		}
 
 		objObfuscator[name] = str;
-    }
+	}
 
 	console.log('objObfuscator', objObfuscator);
 };
