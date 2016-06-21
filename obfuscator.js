@@ -8,10 +8,9 @@ function obfuscator(array_elements) {
 
 	function countRepeatItems(arr) {
 		var data = {};
-		var prop;
 
 		for (var i=0; i < arr.length; i++) {
-			prop = arr[i];
+			var prop = arr[i];
 			if (prop in data) {
 				data[prop]++;
 			} else {
@@ -44,7 +43,7 @@ function obfuscator(array_elements) {
 		var name = sortArr[i];
 		var result = generate(i, 26);
 		var str = '';
-	
+
 		for(var j=0; j < result.length; j++) {
 			var index = result[j];
 			str = str + alphabet[index];
