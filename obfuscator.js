@@ -6,7 +6,7 @@ function obfuscator(array_elements) {
 	var alphabet = 'abcdefghijklmnopqrstuvwxyz';
 	var objObfuscator = {};
 
-	function countRepeatItems(arr) {		
+	function countRepeatItems(arr) {
 		var data = {};
 		var prop;
 
@@ -20,42 +20,32 @@ function obfuscator(array_elements) {
 		}
 		
         return data;
-    }
-	
-	function sortObject(obj) {
-		var arr = [];
-		var prop;
-		for (prop in obj) {
-			if (obj.hasOwnProperty(prop)) {
-				arr.push({
-					'name': prop,
-					'count': obj[prop]
-				});
-			}
-		}
-		arr.sort(function(a, b) {
-			return b.count - a.count;
+	};
+
+	function sort(obj) {
+		var keys = Object.keys(obj).sort(function(a, b) {
+			return obj[b] -obj[a];
 		});
-		
-		return arr;
-	}
+
+		return keys;
+	};
 
 	function generate(i, limit) {
 		var div = Math.floor(i/limit);
 		var mod = i % limit;
 
 		return (div>0 ? generate(div - 1, limit) : []).concat(mod);
-	}
+	};
 
 	var objItems = countRepeatItems(array_elements);
-	var sortArr  = sortObject(objItems);
+	var sortArr  = sort(objItems);
 
 	for (var i=0; i < sortArr.length; i++) {
-		var name = sortArr[i].name;
-		var result = generate(i, 4);
+		var name = sortArr[i];
+		var result = generate(i, 26);
 		var str = '';
 
-		for(var j=0; j< result.length; j++) {
+		for(var j=0; j < result.length; j++) {
 			var index = result[j];
 			str = str + alphabet[index];
 		}
@@ -63,6 +53,5 @@ function obfuscator(array_elements) {
 		objObfuscator[name] = str;
     }
 
-	console.log('Sort', sortArr);
 	console.log('objObfuscator', objObfuscator);
 };
