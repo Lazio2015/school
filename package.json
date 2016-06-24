@@ -1,0 +1,22 @@
+{
+  "name": "lenur",
+  "version": "1.0.0",
+  "description": "",
+  "main": "obfuscator.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lazio2015/school.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lazio2015/school/issues"
+  },
+  "homepage": "https://github.com/Lazio2015/school#readme",
+  "devDependencies": {
+    "chai": "^3.5.0"
+  }
+}
