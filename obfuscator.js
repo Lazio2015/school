@@ -1,7 +1,8 @@
 /**
  * @param {Array} data – массив CSS классов
  */
-function obfuscator(array_elements) {
+//module.exports =
+	function obfuscator(arrayElements) {
 
 	var alphabet = 'abcdefghijklmnopqrstuvwxyz';
 	var objObfuscator = {};
@@ -30,18 +31,30 @@ function obfuscator(array_elements) {
 	};
 
 	function generate(i, limit) {
-		var div = Math.floor(i/limit);
-		var mod = i % limit;
 
-		return (div>0 ? generate(div - 1, limit) : []).concat(mod);
+		result = [];
+		while(i > 0) {
+			var div = Math.floor(i/limit);
+			var mod = i % limit;
+
+			result.push(mod);
+
+			i = div - 1;
+		}
+
+		return result;
+		//var div = Math.floor(i/limit);
+		//var mod = i % limit;
+        //
+		//return (div>0 ? generate(div - 1, limit) : []).concat(mod);
 	};
 
-	var objItems = countRepeatItems(array_elements);
+	var objItems = countRepeatItems(arrayElements);
 	var sortArr  = sort(objItems);
 
 	for (var i=0; i < sortArr.length; i++) {
 		var name = sortArr[i];
-		var result = generate(i, 26);
+		var result = generate(i, 4);
 		var str = '';
 
 		for(var j=0; j < result.length; j++) {
@@ -53,4 +66,5 @@ function obfuscator(array_elements) {
 	}
 
 	console.log('objObfuscator', objObfuscator);
+	return objObfuscator;
 };
