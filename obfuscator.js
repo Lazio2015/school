@@ -1,8 +1,7 @@
 /**
  * @param {Array} data – массив CSS классов
  */
-//module.exports =
-	function obfuscator(arrayElements) {
+module.exports = function (arrayElements) {
 
 	var alphabet = 'abcdefghijklmnopqrstuvwxyz';
 	var objObfuscator = {};
@@ -31,7 +30,7 @@
 	};
 
 	function generate(i, limit) {
-
+/*
 		result = [];
 		while(i > 0) {
 			var div = Math.floor(i/limit);
@@ -43,10 +42,11 @@
 		}
 
 		return result;
-		//var div = Math.floor(i/limit);
-		//var mod = i % limit;
-        //
-		//return (div>0 ? generate(div - 1, limit) : []).concat(mod);
+		*/
+		var div = Math.floor(i/limit);
+		var mod = i % limit;
+
+		return (div>0 ? generate(div - 1, limit) : []).concat(mod);
 	};
 
 	var objItems = countRepeatItems(arrayElements);
